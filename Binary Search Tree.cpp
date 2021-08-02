@@ -1,4 +1,4 @@
-// Binary Search Tree - Implemenation in C++
+// Binary Search Tree - Implementation in C++
 #include<iostream>
 using namespace std;
 
@@ -13,6 +13,7 @@ struct BstNode
 // New Node created everytime data full (right & left)
 BstNode* GetNewNode(int data)
 {
+	// Will execute new address without data
 	BstNode* newNode = new BstNode(); // Same as using malloc
 	// different method same output
 	(*newNode).data = data;
@@ -25,15 +26,15 @@ BstNode* Insert(BstNode* root, int data)
 {
 	if (root == NULL) // empty tree
 	{
-		root = GetNewNode(data); 
+		root = GetNewNode(data); // Put data in the newNode
 	}
-	else if (data <= root->data) // insert to left
+	else if (data <= root->data) 
 	{
-		root->left = Insert(root->left, data);
+		root->left = Insert(root->left, data); // If data less than root..to LEFT
 	}
 	else
 	{
-		root->right = Insert(root->right, data);
+		root->right = Insert(root->right, data); // Bigger..to RIGHT
 	}
 	return root;
 }
@@ -63,7 +64,5 @@ int main()
 	}
 	else cout << "NOT FOUND\n\n";
 	main();
-
-
-
 }
+//"newNode" will be created everytime new data "Insert"ed
