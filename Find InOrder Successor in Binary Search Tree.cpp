@@ -23,7 +23,7 @@ Node* Find(Node* root, int data) {
 struct Node* FindMin(struct Node* root) {
 	if (root == NULL) return NULL;
 	while (root->left != NULL)
-		root = root->left;
+		root = root->left; // flow will move to most left to find the lowest data value
 	return root;
 }
 
@@ -76,7 +76,7 @@ Node* Insert(Node* root, char data) {
 int main() {
 	/*Code To Test the logic
 	  Creating an example tree
-				5
+			    5
 			   / \
 			  3   10
 			 / \   \
@@ -101,3 +101,5 @@ int main() {
 // InOrder Successor must be lesser than parent
 // If "4" chosen, then, 5 will be the InOrder Successor
 // The flow will be like this... 1 -> 3 -> 4 -> 3(is lesser than 4..rejected) -> 5 -> 10 -> 11
+// FindMax will make the flow move to most RIGHT to find the biggest data value
+// FindMin will make the flow move to most left to find the lowest data value
