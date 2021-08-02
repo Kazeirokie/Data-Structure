@@ -30,7 +30,7 @@ struct Node* FindMin(struct Node* root) {
 //Function to find Inorder Successor in a BST
 struct Node* Getsuccessor(struct Node* root, int data) {
 	// Search the Node - O(h)
-	struct Node* current = Find(root, data); // Current is the node we input
+	struct Node* current = Find(root, data); // Current is the node we point at , refer to main() "Find Inorder successor of the node." 
 	if (current == NULL) return NULL;   // Node is not exist
 	if (current->right != NULL) {       //Case 1: Node has right subtree
 		return FindMin(current->right); // O(h) // If "3" chosen, then, "4" will be successor
