@@ -1,38 +1,150 @@
-#include <stdlib.h>
-#include <stdio.h>
+// C++ program to Implement a stack
+//using singly linked list
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 using namespace std;
+
+// Declare linked list node
 
 struct Node
 {
-	int data; // store data
-	struct Node* link; // store address
+    int data;
+    struct Node* link;
 };
-struct Node* top = NULL; // same like head // the beginning of list
 
-void Push(int x)
+struct Node* top;
+
+// Utility function to add an element
+// data in the stack insert at the beginning
+void push(int data)
 {
-	struct Node* temp = (struct Node*)malloc(sizeof(struct Node*));
-	temp->data;
-	temp->link;
-	top = temp;
+
+    // Create new node temp and allocate memory
+    struct Node* temp;
+    temp = new Node();
+
+    // Check if stack (heap) is full.
+    // Then inserting an element would
+    // lead to stack overflow
+    if (!temp)
+    {
+        cout << "\nHeap Overflow";
+        exit(1);
+    }
+
+    // Initialize data into temp data field
+    temp->data = data;
+
+    // Put top pointer reference into temp link
+    temp->link = top;
+
+    // Make temp as top of Stack
+    top = temp;
 }
 
-void Pop()
+// Utility function to check if
+// the stack is empty or not
+int isEmpty()
 {
-	struct Node* temp;
-	if (top == NULL) return; // if stack is empty it will return error
-	temp = top;
-	top = top->link;
-	free(temp);
+    return top == NULL;
 }
 
+// Utility function to return top element in a stack
+int peek()
+{
 
+    // Check for empty stack
+    if (!isEmpty())
+        return top->data;
+    else
+        exit(1);
+}
+
+// Utility function to pop top
+// element from the stack
+void pop()
+{
+    struct Node* temp;
+
+    // Check for stack underflow
+    if (top == NULL)
+    {
+        cout << "\nStack Underflow" << endl;
+        exit(1);
+    }
+    else
+    {
+
+        // Top assign into temp
+        temp = top;
+
+        // Assign second node address to top address
+        top = top->link; // Can use top->link / temp->link..Both of them have same address
+
+        // Destroy connection between
+        // first and second
+        temp->link = NULL; // Can use top->link / temp->link..Both of them have same address
+
+        // Release memory of top node
+        free(temp);
+    }
+}
+
+// Function to print all the
+// elements of the stack
+void display()
+{
+    struct Node* temp;
+
+    // Check for stack underflow
+    if (top == NULL)
+    {
+        cout << "\nStack Underflow";
+        exit(1);
+    }
+    else
+    {
+        temp = top;
+        while (temp != NULL) // temp is needed to allocate memory before push new node into stack
+        {
+
+            // Print node data
+            cout << temp->data << "-> ";
+
+            // Assign temp link to temp
+            temp = temp->link;
+        }
+    }
+}
+
+// Driver Code
 int main()
 {
 
-	Push(2);
-	
-}
+    // Push the elements of stack
+    push(11);
+    push(22);
+    push(33);
+    push(44);
 
-//broken
+    // Display stack elements
+    display();
+
+    // Print top element of stack
+    cout << "\nTop element is "
+        << peek() << endl;
+
+    // Delete top elements of stack
+    pop();
+    pop();
+
+    // Display stack elements
+    display();
+
+    // Print top element of stack
+    cout << "\nTop element is "
+        << peek() << endl;
+
+    return 0;
+}
